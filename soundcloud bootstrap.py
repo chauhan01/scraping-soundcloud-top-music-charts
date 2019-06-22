@@ -1,9 +1,5 @@
-#!/usr/bin/env python
-# coding: utf-8
 
-# In[1]:
-
-
+#Importing libraries
 from selenium import webdriver 
 import pandas as pd  
 from selenium.webdriver.common.keys import Keys
@@ -13,22 +9,15 @@ import time
 driver = webdriver.Chrome()
 
 
-# In[26]:
-
 
 driver.get("https://soundcloud.com/charts/top?genre=all-music") 
 
 driver.find_element_by_css_selector("#content > div > div.l-fluid-fixed > div.sc-border-light-right.l-main > div.l-content > div > div.chartsMain__filters > div:nth-child(3) > button").click()
 
 
-# In[43]:
-
 
 dropdown = driver.find_elements_by_xpath("//section[2]//ul//*[@class = 'sc-link-dark sc-truncate g-block']")
-#dropdown-button-84 > div > div > div > div.g-scrollable-inner > div > section:nth-child(2)
 
-
-# In[46]:
 
 
 genres = []
@@ -40,14 +29,9 @@ for i in dropdown:
     links.append(link)
 
 
-# In[50]:
-
 
 link_data = pd.DataFrame({"Genre": genres, "Link":links})
 link_data.head()
-
-
-# In[53]:
 
 
 def scrap(link_df):
@@ -123,22 +107,14 @@ def scrap(link_df):
         
         temp_df = pd.DataFrame({"song_title": title, "rank":rank, "genre":genre, "artist": artist, "this_week_score": score_this_week, "total_score":total_score})
         df = df.append(temp_df, ignore_index=True)
-        print('dataframe shape is ',df.shape)
-    
-    
-    
+        print('dataframe shape is ',df.shape)   
          
     return df
 
 
-# In[54]:
-
-
+# calling the function and creating the final dataframe
 data = scrap(link_data)
 
 
-# In[55]:
 
-
-data.head()
 
