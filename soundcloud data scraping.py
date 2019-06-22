@@ -85,7 +85,7 @@ def scrap(link_df):
         #song title
         title = [i.split('\n')[1] for i in song_data]
     
-        #this week score in thousands
+        #this week score
         score_this_week = []
         for i in song_score:
             if len(i) < 5:
@@ -94,7 +94,7 @@ def scrap(link_df):
                 score = i.split()[0]
             score_this_week.append(score)
     
-        # total score in million
+        # total score
         total_score = []
         for i in song_score:
             if len(i) < 5:
